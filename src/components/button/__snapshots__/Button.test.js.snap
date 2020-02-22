@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders Button component without crashing 1`] = `
+<button
+  onClick={[Function]}
+  type="button"
+>
+  Button text
+</button>
+`;

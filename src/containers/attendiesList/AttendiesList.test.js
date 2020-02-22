@@ -6,6 +6,10 @@ import configureStore from '../../configureStore';
 
 const store = configureStore();
 
-it('renders AttendiesList container without crashing', () => {
-  shallow(<Provider store={store}><AttendiesList /></Provider>);
+describe('AttendiesList', () => {
+  it('renders AttendiesList container without crashing', () => {
+    const component = shallow(<Provider store={store}><AttendiesList /></Provider>);
+
+    expect(component).toMatchSnapshot();
+  });
 });
