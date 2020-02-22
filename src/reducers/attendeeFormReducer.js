@@ -28,7 +28,7 @@ const attendeeForm = (state = initialState, action) => {
       return {
         ...state,
         status: 'success',
-        msg: 'Data has been saved in DB!',
+        msg: 'Form has been saved!',
       };
     case attendeeFormActions.SEND_ATTENDEE_FORM_UNSUCCESSFUL:
       return {

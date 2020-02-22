@@ -42,7 +42,7 @@ const AttendeeForm = ({
   };
 
   return (
-    <>
+    <div className="container">
       {status !== 'initial' && (
         <Alert type={status} msg={msg}>
           {formValidationErrors.map((error) => (
@@ -50,43 +50,39 @@ const AttendeeForm = ({
           ))}
         </Alert>
       )}
-      <form>
-        <div className="form-row">
+      <div className="container col-md-4 mt-3">
+        <form>
           <InputFormField
             label="First Name"
             id="firstName"
             onChange={handleInputChange}
             value={attendeeForm.firstName}
-            wrapperClass="form-group col-md-6"
           />
           <InputFormField
             label="Last Name"
             id="lastName"
             onChange={handleInputChange}
             value={attendeeForm.lastName}
-            wrapperClass="form-group col-md-6"
           />
-        </div>
-        <InputFormField
-          label="Email"
-          id="email"
-          type="email"
-          onChange={handleInputChange}
-          value={attendeeForm.email}
-          wrapperClass="form-group"
-        />
-        <InputFormField
-          label="Event Date"
-          id="eventDate"
-          type="date"
-          onChange={handleInputChange}
-          value={attendeeForm.eventDate}
-          wrapperClass="form-group"
-          min={dayjs().format('YYYY-MM-DD')}
-        />
-        <Button type="submit" text="Add" onClick={handleSubmit} className="btn btn-primary" />
-      </form>
-    </>
+          <InputFormField
+            label="Email"
+            id="email"
+            type="email"
+            onChange={handleInputChange}
+            value={attendeeForm.email}
+          />
+          <InputFormField
+            label="Event Date"
+            id="eventDate"
+            type="date"
+            onChange={handleInputChange}
+            value={attendeeForm.eventDate}
+            min={dayjs().format('YYYY-MM-DD')}
+          />
+          <Button type="submit" text="Add" onClick={handleSubmit} className="btn btn-primary btn-block" />
+        </form>
+      </div>
+    </div>
   );
 };
 

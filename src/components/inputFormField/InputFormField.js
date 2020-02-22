@@ -3,9 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const InputFormField = ({
-  id, label, value, type, onChange, wrapperClass, ...rest
+  id, label, value, type, onChange, ...rest
 }) => (
-  <div className={wrapperClass}>
+  <div className="form-group">
     <label htmlFor={id}>{label}</label>
     <input
       className="form-control"
@@ -28,13 +28,11 @@ InputFormField.propTypes = {
   ]),
   type: PropTypes.oneOf(['text', 'email', 'date']),
   onChange: PropTypes.func.isRequired,
-  wrapperClass: PropTypes.string,
 };
 
 InputFormField.defaultProps = {
   value: '',
   type: 'text',
-  wrapperClass: 'form-group',
 };
 
 export default InputFormField;

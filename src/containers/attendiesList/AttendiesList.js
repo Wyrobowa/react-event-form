@@ -15,28 +15,26 @@ const AttendiesList = ({ attendiesList, getAttendiesListAction }) => {
   });
 
   return (
-    <table className="table">
-      <thead className="thead-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Event Date</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div className="container-fluid mt-3">
+      <div className="row p-3 border-bottom border-secondary text-white bg-secondary">
+        <div className="col-md-1">#</div>
+        <div className="col-md-3">First Name</div>
+        <div className="col-md-3">Last Name</div>
+        <div className="col-md-3">Email</div>
+        <div className="col-md-2">Event Date</div>
+      </div>
+      <div>
         {attendiesList.map((attendee, index) => (
-          <tr key={attendee.slug}>
-            <th scope="row">{index + 1}</th>
-            <td>{attendee.firstName}</td>
-            <td>{attendee.lastName}</td>
-            <td>{attendee.email}</td>
-            <td>{dayjs(attendee.eventDate).format('YYYY-MM-DD')}</td>
-          </tr>
+          <div className="row p-3 border-bottom border-secondary" key={attendee.slug}>
+            <div className="col-md-1">{index + 1}</div>
+            <div className="col-md-3">{attendee.firstName}</div>
+            <div className="col-md-3">{attendee.lastName}</div>
+            <div className="col-md-3">{attendee.email}</div>
+            <div className="col-md-2">{dayjs(attendee.eventDate).format('YYYY-MM-DD')}</div>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };
 

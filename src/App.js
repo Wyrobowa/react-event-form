@@ -10,11 +10,11 @@ import AttendiesList from './containers/attendiesList/AttendiesList';
 
 const App = () => (
   <Router>
-    <div className="container-fluid">
+    <>
       <Header />
       <Route exact path="/" component={AttendiesList} />
       <Route path="/add" component={AttendeeForm} />
-    </div>
+    </>
   </Router>
 );
 
