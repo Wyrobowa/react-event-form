@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import * as yup from 'yup';
 
 // Actions
-import * as attendeeFormActions from '../../actions/attendeeFormActions';
+import * as actions from '../../actions/attendeeFormActions';
 
 // Components
 import Alert from '../../components/alert/Alert';
@@ -13,7 +13,7 @@ import Button from '../../components/button/Button';
 import InputFormField from '../../components/inputFormField/InputFormField';
 
 // Reducers
-import * as attendeeFormReducer from '../../reducers/attendeeFormReducer';
+import * as reducer from '../../reducers/attendeeFormReducer';
 
 const schema = yup.object().shape({
   firstName: yup.string().required('First Name field can\'t be empty!'),
@@ -96,16 +96,16 @@ AttendeeForm.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  status: attendeeFormReducer.getStatus(state),
-  msg: attendeeFormReducer.getMessage(state),
-  formValidationErrors: attendeeFormReducer.getFormValidationErrors(state),
-  attendeeForm: attendeeFormReducer.getAttendeeForm(state),
+  status: reducer.getStatus(state),
+  msg: reducer.getMessage(state),
+  formValidationErrors: reducer.getFormValidationErrors(state),
+  attendeeForm: reducer.getAttendeeForm(state),
 });
 
 export default connect(
   mapStateToProps,
   {
-    editAttendeeFormAction: attendeeFormActions.editAttendeeForm,
-    sendAttendeeFormAction: attendeeFormActions.sendAttendeeForm,
+    editAttendeeFormAction: actions.editAttendeeForm,
+    sendAttendeeFormAction: actions.sendAttendeeForm,
   },
 )(AttendeeForm);

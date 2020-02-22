@@ -5,9 +5,8 @@ export const CLEAR_ATTENDEE_FORM = 'CLEAR_ATTENDEE_FORM';
 export const RESET_STATUS = 'RESET_STATUS';
 export const FORM_VALIDATION_ERRORS = 'FORM_VALIDATION_ERRORS';
 
-export const sendAttendeeFormSuccessful = (attendeeForm) => ({
+export const sendAttendeeFormSuccessful = () => ({
   type: SEND_ATTENDEE_FORM_SUCCESSFUL,
-  attendeeForm,
 });
 
 export const sendAttendeeFormUnsuccessful = () => ({
@@ -40,10 +39,10 @@ export const sendAttendeeForm = (schema, attendeeForm) => async (dispatch) => {
         body: JSON.stringify(attendeeForm),
       });
 
-      const json = await response.json();
+      await response.json();
 
       dispatch(clearAttendeeForm());
-      dispatch(sendAttendeeFormSuccessful(json.data));
+      dispatch(sendAttendeeFormSuccessful());
     } catch (error) {
       dispatch(sendAttendeeFormUnsuccessful());
     }

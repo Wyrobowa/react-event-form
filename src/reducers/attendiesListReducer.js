@@ -1,4 +1,4 @@
-import { GET_ATTENDIES_LIST_SUCCESSFUL } from '../actions/attendiesListActions';
+import * as actions from '../actions/attendiesListActions';
 
 const initialState = {
   attendiesList: [{
@@ -8,14 +8,22 @@ const initialState = {
     eventDate: '',
     slug: '',
   }],
+  status: 'initial',
+  msg: '',
 };
 
 const attendiesList = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ATTENDIES_LIST_SUCCESSFUL:
+    case actions.GET_ATTENDIES_LIST_SUCCESSFUL:
       return {
         ...state,
         attendiesList: action.payload,
+      };
+    case actions.GET_ATTENDIES_LIST_UNSUCCESSFUL:
+      return {
+        ...state,
+        status: 'danger',
+        msg: 'Something went wrong! List of attendies coudn\'t be loaded!',
       };
     default:
       return state;
@@ -23,5 +31,7 @@ const attendiesList = (state = initialState, action) => {
 };
 
 export const getAttendiesList = (state) => state.attendies.attendiesList;
+export const getStatus = (state) => state.attendies.status;
+export const getMessage = (state) => state.attendies.msg;
 
 export default attendiesList;

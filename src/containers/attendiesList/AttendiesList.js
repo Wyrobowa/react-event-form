@@ -4,18 +4,29 @@ import { connect } from 'react-redux';
 import dayjs from 'dayjs';
 
 // Actions
-import { requestAttendiesList } from '../../actions/attendiesListActions';
+import * as actions from '../../actions/attendiesListActions';
+
+// Components
+import Alert from '../../components/alert/Alert';
 
 // Reducers
-import { getAttendiesList } from '../../reducers/attendiesListReducer';
+import * as reducer from '../../reducers/attendiesListReducer';
 
-const AttendiesList = ({ attendiesList, getAttendiesListAction }) => {
+const AttendiesList = ({
+  status,
+  msg,
+  attendiesList,
+  getAttendiesListAction,
+}) => {
   useEffect(() => {
     getAttendiesListAction();
   });
 
   return (
     <div className="container-fluid mt-3">
+      {status !== 'initial' && (
+        <Alert type={status} msg={msg} />
+      )}
       <div className="row p-3 border-bottom border-secondary text-white bg-secondary">
         <div className="col-md-1">#</div>
         <div className="col-md-3">First Name</div>
@@ -39,17 +50,21 @@ const AttendiesList = ({ attendiesList, getAttendiesListAction }) => {
 };
 
 AttendiesList.propTypes = {
+  status: PropTypes.string.isRequired,
+  msg: PropTypes.string.isRequired,
   attendiesList: PropTypes.array.isRequired,
   getAttendiesListAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  attendiesList: getAttendiesList(state),
+  status: reducer.getStatus(state),
+  msg: reducer.getMessage(state),
+  attendiesList: reducer.getAttendiesList(state),
 });
 
 export default connect(
   mapStateToProps,
   {
-    getAttendiesListAction: requestAttendiesList,
+    getAttendiesListAction: actions.requestAttendiesList,
   },
 )(AttendiesList);
