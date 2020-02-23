@@ -20,22 +20,24 @@ const AttendiesList = ({
 }) => {
   useEffect(() => {
     getAttendiesListAction();
-  });
+  }, []);
 
   return (
     <div className="container-fluid mt-3">
       {status !== 'initial' && (
         <Alert type={status} msg={msg} />
       )}
-      <div className="row p-3 border-bottom border-secondary text-white bg-secondary">
-        <div className="col-md-1">#</div>
-        <div className="col-md-3">First Name</div>
-        <div className="col-md-3">Last Name</div>
-        <div className="col-md-3">Email</div>
-        <div className="col-md-2">Event Date</div>
-      </div>
+      {attendiesList.length > 0 && (
+        <div className="row p-3 border-bottom border-secondary text-white bg-secondary">
+          <div className="col-md-1">#</div>
+          <div className="col-md-3">First Name</div>
+          <div className="col-md-3">Last Name</div>
+          <div className="col-md-3">Email</div>
+          <div className="col-md-2">Event Date</div>
+        </div>
+      )}
       <div>
-        {attendiesList.map((attendee, index) => (
+        {attendiesList.length > 0 && attendiesList.map((attendee, index) => (
           <div className="row p-3 border-bottom border-secondary" key={attendee.slug}>
             <div className="col-md-1">{index + 1}</div>
             <div className="col-md-3">{attendee.firstName}</div>
@@ -44,6 +46,9 @@ const AttendiesList = ({
             <div className="col-md-2">{dayjs(attendee.eventDate).format('YYYY-MM-DD')}</div>
           </div>
         ))}
+        {attendiesList.length === 0 && (
+          <h2 className="text-center">No Attendies in DB!</h2>
+        )}
       </div>
     </div>
   );
