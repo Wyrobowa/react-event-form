@@ -10,7 +10,7 @@ const InputFormField = ({
       className="form-control"
       id={id}
       name={id}
-      value={value || ''}
+      value={value}
       type={type}
       onChange={onChange}
     />
