@@ -27,7 +27,7 @@ const AttendiesList = ({
       {status !== 'initial' && (
         <Alert type={status} msg={msg} />
       )}
-      {attendiesList.length > 0 && (
+      {status !== 'danger' && attendiesList.length > 0 && (
         <div className="row p-3 border-bottom border-secondary text-white bg-secondary">
           <div className="col-md-1">#</div>
           <div className="col-md-3">First Name</div>
@@ -37,7 +37,7 @@ const AttendiesList = ({
         </div>
       )}
       <div>
-        {attendiesList.length > 0 && attendiesList.map((attendee, index) => (
+        {status !== 'danger' && attendiesList.length > 0 && attendiesList.map((attendee, index) => (
           <div className="row p-3 border-bottom border-secondary" key={attendee.slug}>
             <div className="col-md-1">{index + 1}</div>
             <div className="col-md-3">{attendee.firstName}</div>
@@ -46,8 +46,8 @@ const AttendiesList = ({
             <div className="col-md-2">{dayjs(attendee.eventDate).format('YYYY-MM-DD')}</div>
           </div>
         ))}
-        {attendiesList.length === 0 && (
-          <h2 className="text-center">No Attendies in DB!</h2>
+        {status !== 'danger' && attendiesList.length === 0 && (
+          <h2 className="text-center">No Attendies!</h2>
         )}
       </div>
     </div>

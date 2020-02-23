@@ -26,7 +26,7 @@ export const formValidationErrors = (errors) => ({
   errors,
 });
 
-export const sendAttendeeForm = (schema, attendeeForm) => async (dispatch) => {
+export const sendAttendeeForm = (schema, attendeeForm, ref) => async (dispatch) => {
   try {
     await schema.validate(attendeeForm, { abortEarly: false });
 
@@ -41,6 +41,10 @@ export const sendAttendeeForm = (schema, attendeeForm) => async (dispatch) => {
 
       await response.json();
 
+      if (response.status !== 200) {
+        throw new Error();
+      }
+
       dispatch(clearAttendeeForm());
       dispatch(sendAttendeeFormSuccessful());
     } catch (error) {
@@ -50,6 +54,8 @@ export const sendAttendeeForm = (schema, attendeeForm) => async (dispatch) => {
     const errors = error.inner.map((item) => (item.message));
 
     dispatch(formValidationErrors(errors));
+  } finally {
+    ref.current.removeAttribute('disabled');
   }
 };
 

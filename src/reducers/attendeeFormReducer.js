@@ -29,17 +29,20 @@ const attendeeForm = (state = initialState, action) => {
         ...state,
         status: 'success',
         msg: 'Form has been saved!',
+        formValidationErrors: [],
       };
     case attendeeFormActions.SEND_ATTENDEE_FORM_UNSUCCESSFUL:
       return {
         ...state,
         status: 'danger',
         msg: 'Something went wrong!',
+        formValidationErrors: [],
       };
     case attendeeFormActions.RESET_STATUS:
       return {
         ...state,
         status: 'initial',
+        formValidationErrors: [],
       };
     case attendeeFormActions.FORM_VALIDATION_ERRORS:
       return {

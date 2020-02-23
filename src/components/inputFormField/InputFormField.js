@@ -1,9 +1,8 @@
-/* eslint react/jsx-props-no-spreading: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 const InputFormField = ({
-  id, label, value, type, onChange, ...rest
+  id, label, value, type, onChange,
 }) => (
   <div className="form-group">
     <label htmlFor={id}>{label}</label>
@@ -14,7 +13,6 @@ const InputFormField = ({
       value={value || ''}
       type={type}
       onChange={onChange}
-      {...rest}
     />
   </div>
 );

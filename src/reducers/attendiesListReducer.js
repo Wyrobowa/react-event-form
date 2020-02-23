@@ -1,13 +1,7 @@
 import * as actions from '../actions/attendiesListActions';
 
 const initialState = {
-  attendiesList: [{
-    firstName: '',
-    lastName: '',
-    email: '',
-    eventDate: '',
-    slug: '',
-  }],
+  attendiesList: [],
   status: 'initial',
   msg: '',
 };

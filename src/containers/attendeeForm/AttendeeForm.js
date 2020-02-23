@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import dayjs from 'dayjs';
 import * as yup from 'yup';
 
 // Actions
@@ -29,7 +28,14 @@ const AttendeeForm = ({
   attendeeForm,
   editAttendeeFormAction,
   sendAttendeeFormAction,
+  clearAttendeeFormAction,
 }) => {
+  useEffect(() => {
+    clearAttendeeFormAction();
+  }, []);
+
+  const submitButton = useRef(null);
+
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
     editAttendeeFormAction(name, value);
@@ -37,8 +43,9 @@ const AttendeeForm = ({
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
+    submitButton.current.setAttribute('disabled', true);
 
-    sendAttendeeFormAction(schema, attendeeForm);
+    sendAttendeeFormAction(schema, attendeeForm, submitButton);
   };
 
   return (
@@ -46,7 +53,7 @@ const AttendeeForm = ({
       {status !== 'initial' && (
         <Alert type={status} msg={msg}>
           {formValidationErrors.map((error) => (
-            <li>{error}</li>
+            <li key={error}>{error}</li>
           ))}
         </Alert>
       )}
@@ -77,9 +84,14 @@ const AttendeeForm = ({
             type="date"
             onChange={handleInputChange}
             value={attendeeForm.eventDate}
-            min={dayjs().format('YYYY-MM-DD')}
           />
-          <Button type="submit" text="Add" onClick={handleSubmit} className="btn btn-primary btn-block" />
+          <Button
+            type="submit"
+            text="Add"
+            onClick={handleSubmit}
+            className="btn btn-primary btn-block"
+            ref={submitButton}
+          />
         </form>
       </div>
     </div>
@@ -93,6 +105,7 @@ AttendeeForm.propTypes = {
   attendeeForm: PropTypes.object.isRequired,
   editAttendeeFormAction: PropTypes.func.isRequired,
   sendAttendeeFormAction: PropTypes.func.isRequired,
+  clearAttendeeFormAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -107,5 +120,6 @@ export default connect(
   {
     editAttendeeFormAction: actions.editAttendeeForm,
     sendAttendeeFormAction: actions.sendAttendeeForm,
+    clearAttendeeFormAction: actions.clearAttendeeForm,
   },
 )(AttendeeForm);
